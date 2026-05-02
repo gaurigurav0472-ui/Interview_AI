@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}Interview Tips{% endblock %}
+
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-between mb-4 animate__animated animate__fadeInDown">
+    <div>
+        <h2 class="fw-bold mb-1"><i class="fas fa-lightbulb me-2" style="color:#f59e0b;"></i>Interview Tips</h2>
+        <p style="color:#8888aa; margin:0;">Expert advice to help you ace your next interview</p>
+    </div>
+    <a href="/" class="btn btn-outline-custom">
+        <i class="fas fa-arrow-left me-2"></i>Back
+    </a>
+</div>
+
+<!-- STAR Method -->
+<div class="glass-card mb-4 animate__animated animate__fadeInUp">
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="background:linear-gradient(135deg,#6c63ff,#8b5cf6);width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+            <i class="fas fa-star" style="color:#fff;font-size:1.2rem;"></i>
+        </div>
+        <h4 class="fw-bold mb-0">The STAR Method</h4>
+    </div>
+    <p style="color:#8888aa;">Use this framework for all behavioral questions to give structured, compelling answers.</p>
+    <div class="row g-3 mt-1">
+        <div class="col-md-3">
+            <div style="background:#12122a;border-radius:10px;padding:16px;border-left:4px solid #6c63ff;">
+                <div style="font-size:1.5rem;font-weight:800;color:#6c63ff;">S</div>
+                <div class="fw-bold">Situation</div>
+                <small style="color:#8888aa;">Set the scene and give context</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="background:#12122a;border-radius:10px;padding:16px;border-left:4px solid #f50057;">
+                <div style="font-size:1.5rem;font-weight:800;color:#f50057;">T</div>
+                <div class="fw-bold">Task</div>
+                <small style="color:#8888aa;">Describe your responsibility</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="background:#12122a;border-radius:10px;padding:16px;border-left:4px solid #10b981;">
+                <div style="font-size:1.5rem;font-weight:800;color:#10b981;">A</div>
+                <div class="fw-bold">Action</div>
+                <small style="color:#8888aa;">Explain what you did</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="background:#12122a;border-radius:10px;padding:16px;border-left:4px solid #f59e0b;">
+                <div style="font-size:1.5rem;font-weight:800;color:#f59e0b;">R</div>
+                <div class="fw-bold">Result</div>
+                <small style="color:#8888aa;">Share the outcome achieved</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tips Grid -->
+<div class="row g-4 animate__animated animate__fadeInUp">
+
+    <div class="col-md-6">
+        <div class="glass-card h-100">
+            <div class="tip-icon">🎯</div>
+            <h5 class="fw-bold mb-2">Be Specific</h5>
+            <p style="color:#8888aa;">Avoid vague answers. Use real numbers, dates, and outcomes. Instead of "I improved sales", say "I increased sales by 30% in Q3 2023."</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="glass-card h-100">
+            <div class="tip-icon">⏱️</div>
+            <h5 class="fw-bold mb-2">Keep It Concise</h5>
+            <p style="color:#8888aa;">Aim for 1–2 minute answers. Practice timing yourself. Rambling loses the interviewer's attention — stay focused and on-point.</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="glass-card h-100">
+            <div class="tip-icon">🔍</div>
+            <h5 class="fw-bold mb-2">Research the Company</h5>
+            <p style="color:#8888aa;">Know the company's mission, products, and recent news. Mention specific things you admire — it shows genuine interest and preparation.</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="glass-card h-100">
+            <div class="tip-icon">💪</div>
+            <h5 class="fw-bold mb-2">Show Confidence</h5>
+            <p style="color:#8888aa;">Speak clearly, maintain eye contact, and avoid filler words like "um" or "uh". Confidence is as important as the content of your answer.</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="glass-card h-100">
+            <div class="tip-icon">❓</div>
+            <h5 class="fw-bold mb-2">Ask Good Questions</h5>
+            <p style="color:#8888aa;">Always prepare 2–3 questions for the interviewer. Ask about team culture, growth opportunities, or what success looks like in the role.</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="glass-card h-100">
+            <div class="tip-icon">📝</div>
+            <h5 class="fw-bold mb-2">Practice Out Loud</h5>
+            <p style="color:#8888aa;">Reading answers is not enough. Practice speaking them aloud — record yourself, review it, and improve. This builds fluency and reduces nerves.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Do's and Don'ts -->
+<div class="row g-4 mt-2 animate__animated animate__fadeInUp">
+    <div class="col-md-6">
+        <div class="glass-card h-100" style="border-left:4px solid #10b981;">
+            <h5 class="fw-bold mb-3" style="color:#10b981;"><i class="fas fa-check-circle me-2"></i>Do's</h5>
+            <ul class="list-unstyled mb-0">
+                {% for item in ["Arrive (or log in) 5–10 minutes early",
+                                "Dress appropriately for the role",
+                                "Listen carefully before answering",
+                                "Use examples from real experience",
+                                "Send a thank-you email after the interview",
+                                "Be honest about what you don't know"] %}
+                <li class="mb-2 d-flex align-items-center gap-2">
+                    <i class="fas fa-check" style="color:#10b981;"></i>
+                    <span style="color:#ccc;">{{ item }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="glass-card h-100" style="border-left:4px solid #ef4444;">
+            <h5 class="fw-bold mb-3" style="color:#ef4444;"><i class="fas fa-times-circle me-2"></i>Don'ts</h5>
+            <ul class="list-unstyled mb-0">
+                {% for item in ["Badmouth previous employers",
+                                "Give one-word answers",
+                                "Lie or exaggerate on your resume",
+                                "Check your phone during the interview",
+                                "Interrupt the interviewer",
+                                "Forget to follow up after the interview"] %}
+                <li class="mb-2 d-flex align-items-center gap-2">
+                    <i class="fas fa-times" style="color:#ef4444;"></i>
+                    <span style="color:#ccc;">{{ item }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="glass-card text-center mt-4 animate__animated animate__fadeInUp">
+    <h5 class="fw-bold mb-2">Ready to practice?</h5>
+    <p style="color:#8888aa;">Apply these tips in a real practice session right now.</p>
+    <a href="/" class="btn btn-primary-custom">
+        <i class="fas fa-play me-2"></i>Start Practicing
+    </a>
+</div>
+
+{% endblock %}

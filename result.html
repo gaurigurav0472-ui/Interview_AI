@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Result — {{ result.grade }} Grade{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+
+        <!-- Score Card -->
+        <div class="glass-card text-center mb-4 animate__animated animate__zoomIn">
+
+            <!-- Score Ring -->
+            {% if result.score >= 85 %}
+                <div class="score-ring score-excellent">{{ result.score }}</div>
+            {% elif result.score >= 70 %}
+                <div class="score-ring score-good">{{ result.score }}</div>
+            {% elif result.score >= 40 %}
+                <div class="score-ring score-average">{{ result.score }}</div>
+            {% else %}
+                <div class="score-ring score-poor">{{ result.score }}</div>
+            {% endif %}
+
+            <h3 class="fw-bold mb-2">
+                Grade:
+                <span style="background:linear-gradient(135deg,#6c63ff,#f50057);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+                    {{ result.grade }}
+                </span>
+            </h3>
+
+            <span class="badge text-white px-4 py-2 rounded-pill mb-3"
+                  style="background:linear-gradient(135deg,#6c63ff,#8b5cf6); font-size:0.95rem;">
+                {{ result.badge }}
+            </span>
+
+            <p style="color:#8888aa; max-width:480px; margin:0 auto;">{{ result.summary }}</p>
+
+            <!-- Score bar -->
+            <div class="progress mt-4" style="height:12px;">
+                <div class="progress-bar"
+                     style="width:{{ result.score }}%;
+                            background:{% if result.score >= 85 %}linear-gradient(90deg,#10b981,#059669){% elif result.score >= 70 %}linear-gradient(90deg,#6c63ff,#8b5cf6){% elif result.score >= 40 %}linear-gradient(90deg,#f59e0b,#d97706){% else %}linear-gradient(90deg,#ef4444,#dc2626){% endif %};
+                            transition: width 1.5s ease;">
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-1">
+                <small style="color:#8888aa;">0</small>
+                <small style="color:#8888aa;">Score: {{ result.score }}/100</small>
+                <small style="color:#8888aa;">100</small>
+            </div>
+        </div>
+
+        <!-- Question & Answer -->
+        <div class="glass-card mb-4 animate__animated animate__fadeInUp">
+            <h5 class="fw-bold mb-3"><i class="fas fa-question-circle me-2" style="color:#6c63ff;"></i>Question</h5>
+            <p style="color:#e0e0f0; font-size:1.05rem;">{{ question.question }}</p>
+
+            <hr style="border-color:rgba(108,99,255,0.2);">
+
+            <h5 class="fw-bold mb-3"><i class="fas fa-comment-dots me-2" style="color:#10b981;"></i>Your Answer</h5>
+            <div style="background:#12122a; border-radius:10px; padding:16px; color:#ccc; line-height:1.7;">
+                {{ answer }}
+            </div>
+            <small style="color:#8888aa;" class="mt-2 d-block">
+                <i class="fas fa-align-left me-1"></i>{{ result.word_count }} words
+            </small>
+        </div>
+
+        <!-- Feedback Points -->
+        <div class="glass-card mb-4 animate__animated animate__fadeInUp">
+            <h5 class="fw-bold mb-3"><i class="fas fa-chart-bar me-2" style="color:#f59e0b;"></i>Detailed Feedback</h5>
+            <ul class="list-unstyled mb-0">
+                {% for point in result.feedback_points %}
+                <li class="mb-2" style="padding:10px 14px; background:#12122a; border-radius:8px; font-size:0.95rem;">
+                    {{ point }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Suggestions -->
+        {% if result.suggestions %}
+        <div class="glass-card mb-4 animate__animated animate__fadeInUp">
+            <h5 class="fw-bold mb-3"><i class="fas fa-lightbulb me-2" style="color:#6c63ff;"></i>How to Improve</h5>
+            <ul class="list-unstyled mb-0">
+                {% for s in result.suggestions %}
+                <li class="mb-2 d-flex align-items-start gap-2">
+                    <i class="fas fa-arrow-right mt-1" style="color:#6c63ff; flex-shrink:0;"></i>
+                    <span style="color:#ccc;">{{ s }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- Tip from question -->
+        <div class="glass-card mb-4 animate__animated animate__fadeInUp"
+             style="border-left:4px solid #f59e0b;">
+            <h6 class="fw-bold mb-2"><i class="fas fa-star me-2" style="color:#f59e0b;"></i>Expert Tip for This Question</h6>
+            <p style="color:#ccc; margin:0;">{{ question.tips }}</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row g-3 animate__animated animate__fadeInUp">
+            <div class="col-md-4">
+                <a href="/practice/{{ category }}" class="btn btn-primary-custom w-100">
+                    <i class="fas fa-redo me-2"></i>Try Again
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/" class="btn btn-outline-custom w-100">
+                    <i class="fas fa-home me-2"></i>Dashboard
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/history" class="btn btn-outline-custom w-100">
+                    <i class="fas fa-history me-2"></i>View History
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Animate score bar on load
+window.addEventListener('load', () => {
+    const bar = document.querySelector('.progress-bar');
+    if (bar) {
+        const target = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => { bar.style.width = target; }, 300);
+    }
+});
+</script>
+{% endblock %}

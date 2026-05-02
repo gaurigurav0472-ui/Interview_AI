@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Answer History{% endblock %}
+
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-between mb-4 animate__animated animate__fadeInDown">
+    <div>
+        <h2 class="fw-bold mb-1"><i class="fas fa-history me-2" style="color:#6c63ff;"></i>Answer History</h2>
+        <p style="color:#8888aa; margin:0;">Your last {{ history|length }} practice answers</p>
+    </div>
+    <a href="/" class="btn btn-outline-custom">
+        <i class="fas fa-arrow-left me-2"></i>Back
+    </a>
+</div>
+
+{% if history %}
+
+<!-- Summary Stats -->
+<div class="row g-4 mb-5 animate__animated animate__fadeInUp">
+    <div class="col-md-4">
+        <div class="glass-card text-center">
+            <div style="font-size:2rem; font-weight:800; color:#6c63ff;">{{ history|length }}</div>
+            <div style="color:#8888aa;">Total Attempts</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="glass-card text-center">
+            {% set avg = (history | map(attribute='score') | list | sum) / history|length %}
+            <div style="font-size:2rem; font-weight:800; color:#10b981;">{{ avg | round(1) }}%</div>
+            <div style="color:#8888aa;">Average Score</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="glass-card text-center">
+            {% set best = history | map(attribute='score') | list | max %}
+            <div style="font-size:2rem; font-weight:800; color:#f59e0b;">{{ best }}%</div>
+            <div style="color:#8888aa;">Best Score</div>
+        </div>
+    </div>
+</div>
+
+<!-- History Table -->
+<div class="glass-card animate__animated animate__fadeInUp">
+    <div class="table-responsive">
+        <table class="table history-table mb-0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Question</th>
+                    <th>Category</th>
+                    <th>Score</th>
+                    <th>Grade</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history %}
+                <tr>
+                    <td style="color:#8888aa;">{{ loop.index }}</td>
+                    <td>
+                        <div style="font-weight:500; color:#e0e0f0; max-width:280px;">{{ item.question }}</div>
+                        <small style="color:#8888aa;">{{ item.answer }}</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-{{ item.category|lower }} text-white px-2 py-1 rounded-pill">
+                            {{ item.category }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="progress flex-grow-1" style="height:6px; min-width:60px;">
+                                <div class="progress-bar"
+                                     style="width:{{ item.score }}%;
+                                            background:{% if item.score >= 85 %}#10b981{% elif item.score >= 70 %}#6c63ff{% elif item.score >= 40 %}#f59e0b{% else %}#ef4444{% endif %};">
+                                </div>
+                            </div>
+                            <span style="color:#e0e0f0; font-weight:600; min-width:36px;">{{ item.score }}%</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span style="font-weight:700; font-size:1.1rem;
+                                     color:{% if item.grade == 'A' %}#10b981{% elif item.grade == 'B' %}#6c63ff{% elif item.grade == 'C' %}#f59e0b{% else %}#ef4444{% endif %};">
+                            {{ item.grade }}
+                        </span>
+                    </td>
+                    <td style="color:#8888aa; font-size:0.85rem; white-space:nowrap;">{{ item.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% else %}
+
+<!-- Empty State -->
+<div class="glass-card text-center py-5 animate__animated animate__fadeIn">
+    <div style="font-size:4rem; margin-bottom:16px;">📋</div>
+    <h4 class="fw-bold mb-2">No history yet</h4>
+    <p style="color:#8888aa;">Start practicing to see your answers and scores here.</p>
+    <a href="/" class="btn btn-primary-custom mt-3">
+        <i class="fas fa-play me-2"></i>Start Practicing
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock %}
